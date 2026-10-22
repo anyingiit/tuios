@@ -8152,3 +8152,13 @@ dialog does not take.
 | Claim | Control | Test that failed | Result |
 |---|---|---|---|
 | Keys a tape presses do not answer the dialog | the `pressingTapeKeys` check cut | `TestNativePluginApproval` ("a tape's Press of allow and Enter let the plugin run") | **caught** |
+## Look take-over
+
+`TestLookTakeOverAndRemove` applies a look over a config.toml and a later
+config.d file that set the same keys: with `--yes` alone, then with the
+take-over answered on a terminal, then removes it. Run on 2026-10-22.
+
+| Wiring | Cut | Tests that fail | Verdict |
+| --- | --- | --- | --- |
+| `--yes` alone does not take keys over | `confirmTakeOver` answers yes for `--yes` | `TestLookTakeOverAndRemove` ("apply --yes changed config.toml") | **caught** |
+| look remove puts the saved values back | `remove` in `internal/config/look.go` skips `Restore.write` | `TestLookTakeOverAndRemove` ("look remove did not put config.toml back byte for byte") | **caught** |
