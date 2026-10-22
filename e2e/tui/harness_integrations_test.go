@@ -631,6 +631,8 @@ func startPlugin(t *testing.T, base, harness, session, window string) *pluginDri
 				close(d.ready)
 			}
 		}
+		// A read error ends the driver as EOF does: closed fails the wait.
+		_ = sc.Err()
 	}()
 	t.Cleanup(func() {
 		_ = stdin.Close()
