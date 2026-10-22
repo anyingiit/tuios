@@ -918,7 +918,7 @@ func spawnRefOK(name string) bool {
 			return false
 		}
 	}
-	for _, part := range strings.Split(name, "/") {
+	for part := range strings.SplitSeq(name, "/") {
 		if strings.HasPrefix(part, ".") || strings.HasSuffix(part, ".lock") {
 			return false
 		}
